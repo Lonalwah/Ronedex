@@ -1,10 +1,9 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import PokeContext from "../context/poke/pokeContext";
-import M from "materialize-css/dist/js/materialize.min.js";
 
 const Pokemon = () => {
   const pokeContext = useContext(PokeContext);
-  const { loading, pokemon, getPokemon } = pokeContext;
+  const { loading, pokemon } = pokeContext;
 
   if (loading || !pokemon)
     return (
@@ -20,6 +19,7 @@ const Pokemon = () => {
     <div className='card horizontal'>
       <div className='card-image'>
         <img
+          alt={`official artwork ${name}`}
           src={sprites.other["official-artwork"].front_default}
           style={{ height: "200px" }}
         />
@@ -35,7 +35,9 @@ const Pokemon = () => {
               <span className='title'>Type</span>
               <span className='secondary-content'>
                 {types.map((t) => (
-                  <span className='badge blue white-text'>{t.type.name}</span>
+                  <span key={t.type.name} className='badge blue white-text'>
+                    {t.type.name}
+                  </span>
                 ))}
               </span>
             </li>
@@ -53,7 +55,7 @@ const Pokemon = () => {
           <span className='card-title'>Stats</span>
           <div className='collection'>
             {stats.map((s) => (
-              <li className='collection-item'>
+              <li key={s.stat.name} className='collection-item'>
                 <span className='title'>{s.stat.name.toUpperCase()}</span>
                 <span className='secondary-content'>{s.base_stat}</span>
               </li>
@@ -64,7 +66,7 @@ const Pokemon = () => {
           <span className='card-title'>Abilities</span>
           <div className='collection'>
             {abilities.map((a) => (
-              <li className='collection-item'>
+              <li key={a.ability.name} className='collection-item'>
                 <span>{a.ability.name.toUpperCase()}</span>
               </li>
             ))}
@@ -74,7 +76,7 @@ const Pokemon = () => {
           <span className='card-title'>Moves</span>
           <div className='collection'>
             {moves.map((m) => (
-              <li className='collection-item'>
+              <li key={m.move.name} className='collection-item'>
                 <span>{m.move.name.toUpperCase()}</span>
               </li>
             ))}

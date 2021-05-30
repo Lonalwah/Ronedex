@@ -1,4 +1,10 @@
-import { GET_POKEMON_LIST, SET_LOADING, QUERY_POKEMON } from "../types";
+import {
+  GET_POKEMON_LIST,
+  SET_LOADING,
+  QUERY_POKEMON,
+  POKEMON_ERROR,
+  FETCH_FORM_LIST,
+} from "../types";
 
 const PokeReducer = (state, action) => {
   switch (action.type) {
@@ -10,7 +16,7 @@ const PokeReducer = (state, action) => {
     case GET_POKEMON_LIST:
       return {
         ...state,
-        pokemonList: action.payload.results,
+        pokemonList: [...state.pokemonList, action.payload],
         loading: false,
       };
     case QUERY_POKEMON:
@@ -19,7 +25,20 @@ const PokeReducer = (state, action) => {
         pokemon: action.payload,
         loading: false,
       };
-
+    case FETCH_FORM_LIST:
+      return {
+        ...state,
+        formList: action.payload.results,
+        formNextUrl: action.payload.next,
+        loading: false,
+      };
+    case POKEMON_ERROR:
+      console.error(action.payload);
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
     default:
       return state;
   }

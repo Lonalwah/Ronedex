@@ -1,44 +1,54 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
+
 import PokeContext from "../context/poke/pokeContext";
+import PokeItem from "./PokeItem";
 
 const PokeList = () => {
   const pokeContext = useContext(PokeContext);
-
-  const { pokemonList, loading, getPokemonList, getPokemon } = pokeContext;
+  const {
+    pokemonList,
+    loading,
+    getPokemonList,
+    fetchFormList,
+    getPokemon,
+    formList,
+    formNextUrl,
+  } = pokeContext;
 
   useEffect(() => {
-    getPokemonList();
+    fetchFormList(null, 0, 30);
 
     // Get initial Random Pokemon
-    getPokemon(
-      `https://pokeapi.co/api/v2/pokemon/${Math.floor(
-        Math.random() * 200 + 1
-      )}/`
-    );
+    getPokemon(Math.floor(Math.random() * 200 + 1));
+
+    // eslint-disable-next-line
   }, []);
 
-  const onClick = (e) => {
-    e.preventDefault();
-    getPokemon(e.target.dataset.url);
-  };
-
-  if (loading && !pokemonList.length > 0)
-    return (
-      <div className='progress'>
-        <div className='indeterminate'></div>
-      </div>
-    );
+  useEffect(() => {
+    getPokemonList(formList);
+  }, [formList]);
 
   return (
-    <Fragment>
+    <ul>
       {pokemonList.map((p) => (
+        <PokeItem pokemon={p} key={p.id} />
+      ))}
+      {formNextUrl !== null ? (
         <li>
-          <a href='#!' onClick={onClick} data-url={p.url}>
-            {p.name.toUpperCase()}
+          <a
+            href='#!'
+            className='waves-effect waves-teal btn-flat btn-large'
+            onClick={() => {
+              fetchFormList(formNextUrl);
+            }}
+          >
+            More Pokemon...
           </a>
         </li>
-      ))}
-    </Fragment>
+      ) : (
+        ""
+      )}
+    </ul>
   );
 };
 

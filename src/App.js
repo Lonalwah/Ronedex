@@ -1,4 +1,4 @@
-import react, { useEffect } from "react";
+import { useEffect } from "react";
 
 import "materialize-css/dist/css/materialize.min.css";
 import M from "materialize-css/dist/js/materialize.min.js";
@@ -30,7 +30,7 @@ const App = () => {
               </a>
             </div>
           </nav>
-          <ul id='slide-out' className='sidenav'>
+          <ul id='slide-out' className='sidenav' style={{ height: "100%" }}>
             <li>
               <div className='user-view'>
                 <span className='header'>Ronedex</span>
@@ -40,18 +40,16 @@ const App = () => {
               <a href='#!'>About</a>
             </li>
             <li>
-              <div class='divider'></div>
+              <div className='divider'></div>
             </li>
             <li className='no-padding'>
               <ul className='collapsible collapsible-accordion'>
                 <li>
-                  <a className='collapsible-header'>
+                  <a href='#!' className='collapsible-header'>
                     Pokemon<i className='material-icons'>arrow_drop_down</i>
                   </a>
                   <div className='collapsible-body'>
-                    <ul>
-                      <PokeList />
-                    </ul>
+                    <PokeList />
                   </div>
                 </li>
               </ul>
