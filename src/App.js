@@ -1,25 +1,72 @@
-import logo from './logo.svg';
-import './App.css';
+import react, { useEffect } from "react";
 
-function App() {
+import "materialize-css/dist/css/materialize.min.css";
+import M from "materialize-css/dist/js/materialize.min.js";
+
+import "./App.css";
+
+import PokeState from "./context/poke/pokeState";
+import PokeList from "./components/PokeList";
+import Pokemon from "./components/Pokemon";
+
+const App = () => {
+  useEffect(() => {
+    // Initalize Materialize Javascript
+    M.AutoInit();
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PokeState>
+      <div className='App'>
+        <header>
+          <nav>
+            <div className='nav-wrapper'>
+              <a
+                href='#!'
+                data-target='slide-out'
+                className='brand-logo left sidenav-trigger show-on-large'
+              >
+                <i className='material-icons'>menu</i>Ronedex
+              </a>
+            </div>
+          </nav>
+          <ul id='slide-out' className='sidenav'>
+            <li>
+              <div className='user-view'>
+                <span className='header'>Ronedex</span>
+              </div>
+            </li>
+            <li>
+              <a href='#!'>About</a>
+            </li>
+            <li>
+              <div class='divider'></div>
+            </li>
+            <li className='no-padding'>
+              <ul className='collapsible collapsible-accordion'>
+                <li>
+                  <a className='collapsible-header'>
+                    Pokemon<i className='material-icons'>arrow_drop_down</i>
+                  </a>
+                  <div className='collapsible-body'>
+                    <ul>
+                      <PokeList />
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </header>
+        <section>
+          <div className='container'>
+            <Pokemon />
+          </div>
+        </section>
+        <footer></footer>
+      </div>
+    </PokeState>
   );
-}
+};
 
 export default App;

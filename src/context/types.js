@@ -1,0 +1,3 @@
+export const SET_LOADING = "SET_LOADING";
+export const GET_POKEMON_LIST = "GET_POKEMON_LIST";
+export const QUERY_POKEMON = "QUERY_POKEMON";
