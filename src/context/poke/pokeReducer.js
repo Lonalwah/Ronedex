@@ -16,7 +16,9 @@ const PokeReducer = (state, action) => {
     case GET_POKEMON_LIST:
       return {
         ...state,
-        pokemonList: [...state.pokemonList, action.payload],
+        pokemonList: [...state.pokemonList, action.payload].sort((a,b) => {
+          return a.id - b.id;
+        }),
         loading: false,
       };
     case QUERY_POKEMON:
