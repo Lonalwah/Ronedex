@@ -1,11 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PokeContext from "../context/poke/pokeContext";
+import PokeSpecies from "./PokeSpecies";
 
 const Pokemon = () => {
   const pokeContext = useContext(PokeContext);
-  const { loading, pokemon } = pokeContext;
+  const { loading, pokemon, species, getSpecies } = pokeContext;
 
-  if (loading || !pokemon)
+  useEffect(() => {
+    if (pokemon !== null) getSpecies(pokemon.species);
+  }, [pokemon]);
+
+  if (loading || !pokemon || !species)
     return (
       <div className='progress'>
         <div className='indeterminate'></div>
@@ -23,13 +28,20 @@ const Pokemon = () => {
           src={sprites.other["official-artwork"].front_default}
           style={{ height: "200px" }}
         />
-        <p className='center-align'>No. {String(id).padStart(3, "0")}</p>
+        <p className='center-align'>
+          No.{" "}
+          {String(
+            species.pokedex_numbers.find((e) => e.pokedex.name === "national")
+              .entry_number
+          ).padStart(3, "0")}
+        </p>
       </div>
       <div className='card-stacked'>
         <div className='card-content'>
           <span className='card-title'>
-            {name.slice(0, 1).toUpperCase() + name.slice(1)}
+            {species.names.find((e) => e.language.name === "en").name}
           </span>
+          <PokeSpecies species={species} />
           <div className='collection'>
             <li className='collection-item'>
               <span className='title'>Type</span>

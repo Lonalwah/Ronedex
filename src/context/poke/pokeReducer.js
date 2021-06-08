@@ -4,6 +4,7 @@ import {
   QUERY_POKEMON,
   POKEMON_ERROR,
   FETCH_FORM_LIST,
+  GET_SPECIES,
 } from "../types";
 
 const PokeReducer = (state, action) => {
@@ -16,7 +17,7 @@ const PokeReducer = (state, action) => {
     case GET_POKEMON_LIST:
       return {
         ...state,
-        pokemonList: [...state.pokemonList, action.payload].sort((a,b) => {
+        pokemonList: [...state.pokemonList, action.payload].sort((a, b) => {
           return a.id - b.id;
         }),
         loading: false,
@@ -25,6 +26,7 @@ const PokeReducer = (state, action) => {
       return {
         ...state,
         pokemon: action.payload,
+        species: null,
         loading: false,
       };
     case FETCH_FORM_LIST:
@@ -33,6 +35,11 @@ const PokeReducer = (state, action) => {
         formList: action.payload.results,
         formNextUrl: action.payload.next,
         loading: false,
+      };
+    case GET_SPECIES:
+      return {
+        ...state,
+        species: action.payload,
       };
     case POKEMON_ERROR:
       console.error(action.payload);

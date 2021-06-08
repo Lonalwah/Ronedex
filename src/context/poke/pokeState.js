@@ -10,6 +10,7 @@ import {
   SET_LOADING,
   POKEMON_ERROR,
   FETCH_FORM_LIST,
+  GET_SPECIES,
 } from "../types";
 
 const PokeState = (props) => {
@@ -18,7 +19,7 @@ const PokeState = (props) => {
     pokemon: null,
     loading: false,
     error: null,
-
+    species: null,
     formList: [],
     formNextUrl: null,
   };
@@ -73,17 +74,28 @@ const PokeState = (props) => {
     }
   };
 
+  const getSpecies = async (species) => {
+    try {
+      const res = await axios.get(species.url);
+      dispatch({ type: GET_SPECIES, payload: res.data });
+    } catch (error) {
+      dispatch({ type: POKEMON_ERROR, payload: error.msg });
+    }
+  };
+
   return (
     <PokeContext.Provider
       value={{
         pokemonList: state.pokemonList,
         pokemon: state.pokemon,
+        species: state.species,
         loading: state.loading,
         formList: state.formList,
         formNextUrl: state.formNextUrl,
         getPokemonList,
         getPokemon,
         fetchFormList,
+        getSpecies,
       }}
     >
       {props.children}

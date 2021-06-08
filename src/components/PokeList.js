@@ -7,7 +7,6 @@ const PokeList = () => {
   const pokeContext = useContext(PokeContext);
   const {
     pokemonList,
-    loading,
     getPokemonList,
     fetchFormList,
     getPokemon,
