@@ -5,40 +5,30 @@ import PokeItem from "./PokeItem";
 
 const PokeList = () => {
   const pokeContext = useContext(PokeContext);
-  const {
-    pokemonList,
-    getPokemonList,
-    fetchFormList,
-    getPokemon,
-    formList,
-    formNextUrl,
-  } = pokeContext;
+  const { pokemonList, getPokemonList, getPokemon, listNextUrl, pokemonCount } =
+    pokeContext;
 
   useEffect(() => {
-    fetchFormList(null, 0, 30);
-
-    // Get initial Random Pokemon
-    getPokemon(Math.floor(Math.random() * 200 + 1));
-
-    // eslint-disable-next-line
+    getPokemonList(null, 0, 30);
   }, []);
 
   useEffect(() => {
-    getPokemonList(formList);
-  }, [formList]);
+    // Get initial Random Pokemon
+    getPokemon(Math.floor(Math.random() * pokemonCount + 1));
+  }, [pokemonList]);
 
   return (
     <ul>
       {pokemonList.map((p) => (
-        <PokeItem pokemon={p} key={p.id} />
+        <PokeItem pokeItem={p} key={p.name} />
       ))}
-      {formNextUrl !== null ? (
+      {listNextUrl !== null ? (
         <li>
           <a
             href='#!'
             className='waves-effect waves-teal btn-flat btn-large'
             onClick={() => {
-              fetchFormList(formNextUrl);
+              getPokemonList(listNextUrl);
             }}
           >
             More Pokemon...

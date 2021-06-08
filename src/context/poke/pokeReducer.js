@@ -1,9 +1,8 @@
 import {
   GET_POKEMON_LIST,
   SET_LOADING,
-  QUERY_POKEMON,
+  GET_POKEMON,
   POKEMON_ERROR,
-  FETCH_FORM_LIST,
   GET_SPECIES,
 } from "../types";
 
@@ -17,23 +16,15 @@ const PokeReducer = (state, action) => {
     case GET_POKEMON_LIST:
       return {
         ...state,
-        pokemonList: [...state.pokemonList, action.payload].sort((a, b) => {
-          return a.id - b.id;
-        }),
-        loading: false,
+        pokemonList: state.pokemonList.concat(action.payload.results),
+        listNextUrl: action.payload.next,
+        pokemonCount: action.payload.count,
       };
-    case QUERY_POKEMON:
+    case GET_POKEMON:
       return {
         ...state,
         pokemon: action.payload,
         species: null,
-        loading: false,
-      };
-    case FETCH_FORM_LIST:
-      return {
-        ...state,
-        formList: action.payload.results,
-        formNextUrl: action.payload.next,
         loading: false,
       };
     case GET_SPECIES:

@@ -1,17 +1,40 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
 import PokeContext from "../context/poke/pokeContext";
 import PropTypes from "prop-types";
 
-const PokeItem = ({ pokemon }) => {
+const PokeItem = ({ pokeItem }) => {
   const pokeContext = useContext(PokeContext);
-  const { id, name, sprites } = pokemon;
   const { getPokemon } = pokeContext;
+
+  const [pokeForm, setPokeForm] = useState(null);
+
+  useEffect(async () => {
+    const res = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon-form/${pokeItem.name}`
+    );
+
+    setPokeForm(res.data);
+  }, [pokeItem]);
 
   const onClick = (e) => {
     e.preventDefault();
-
-    getPokemon(name);
+    getPokemon(pokeItem.name);
   };
+
+  if (pokeForm === null)
+    return (
+      <li>
+        <a href='#!' onClick={onClick}>
+          <i style={{ width: "48px" }}></i>
+          <span className='title'>
+            {pokeItem.name.slice(0, 1).toUpperCase() + pokeItem.name.slice(1)}
+          </span>
+        </a>
+      </li>
+    );
+
+  const { id, name, sprites } = pokeForm;
 
   return (
     <li>
@@ -32,7 +55,7 @@ const PokeItem = ({ pokemon }) => {
 };
 
 PokeItem.propType = {
-  pokemon: PropTypes.object.isRequired,
+  pokeItem: PropTypes.object.isRequired,
 };
 
 export default PokeItem;

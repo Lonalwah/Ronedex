@@ -6,22 +6,21 @@ import PokeReducer from "./pokeReducer";
 
 import {
   GET_POKEMON_LIST,
-  QUERY_POKEMON,
+  GET_POKEMON,
   SET_LOADING,
   POKEMON_ERROR,
-  FETCH_FORM_LIST,
   GET_SPECIES,
 } from "../types";
 
 const PokeState = (props) => {
   const initialState = {
     pokemonList: [],
+    listNextUrl: null,
+    pokemonCount: 0,
     pokemon: null,
     loading: false,
     error: null,
     species: null,
-    formList: [],
-    formNextUrl: null,
   };
 
   const [state, dispatch] = useReducer(PokeReducer, initialState);
@@ -31,33 +30,16 @@ const PokeState = (props) => {
   };
 
   // Fetch pokeform named list
-  const fetchFormList = async (url = null, offset = 0, limit = 20) => {
-    setLoading();
+  const getPokemonList = async (url = null, offset = 0, limit = 20) => {
     try {
       const res = await axios.get(
         url
           ? url
-          : `https://pokeapi.co/api/v2/pokemon-form/?offset=${offset}&limit=${limit}`
+          : `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`
       );
       dispatch({
-        type: FETCH_FORM_LIST,
+        type: GET_POKEMON_LIST,
         payload: res.data,
-      });
-    } catch (error) {
-      dispatch({ type: POKEMON_ERROR, payload: error.msg });
-    }
-  };
-
-  const getPokemonList = async (fetchList) => {
-    setLoading();
-
-    try {
-      fetchList.forEach(async (f) => {
-        const res = await axios.get(f.url);
-        dispatch({
-          type: GET_POKEMON_LIST,
-          payload: res.data,
-        });
       });
     } catch (error) {
       dispatch({ type: POKEMON_ERROR, payload: error.msg });
@@ -68,7 +50,7 @@ const PokeState = (props) => {
     setLoading();
     try {
       const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
-      dispatch({ type: QUERY_POKEMON, payload: res.data });
+      dispatch({ type: GET_POKEMON, payload: res.data });
     } catch (error) {
       dispatch({ type: POKEMON_ERROR, payload: error.msg });
     }
@@ -87,14 +69,14 @@ const PokeState = (props) => {
     <PokeContext.Provider
       value={{
         pokemonList: state.pokemonList,
+        listNextUrl: state.listNextUrl,
+        pokemonCount: state.pokemonCount,
         pokemon: state.pokemon,
         species: state.species,
         loading: state.loading,
-        formList: state.formList,
-        formNextUrl: state.formNextUrl,
+
         getPokemonList,
         getPokemon,
-        fetchFormList,
         getSpecies,
       }}
     >
