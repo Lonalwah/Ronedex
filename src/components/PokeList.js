@@ -13,9 +13,11 @@ const PokeList = () => {
   }, []);
 
   useEffect(() => {
-    // Get initial Random Pokemon
-    getPokemon(Math.floor(Math.random() * pokemonCount + 1));
-  }, [pokemonList]);
+    if (pokemonCount !== 0) {
+      // Get initial Random Pokemon
+      getPokemon(Math.floor(Math.random() * pokemonCount + 1));
+    }
+  }, [pokemonCount]);
 
   return (
     <ul>

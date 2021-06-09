@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import PokeContext from "../context/poke/pokeContext";
 import PokeSpecies from "./PokeSpecies";
+import PokeAbility from "./PokeAbility";
 
 const Pokemon = () => {
   const pokeContext = useContext(PokeContext);
@@ -78,9 +79,7 @@ const Pokemon = () => {
           <span className='card-title'>Abilities</span>
           <div className='collection'>
             {abilities.map((a) => (
-              <li key={a.ability.name} className='collection-item'>
-                <span>{a.ability.name.toUpperCase()}</span>
-              </li>
+              <PokeAbility pokeAbility={a} key={a.ability.name} />
             ))}
           </div>
         </div>

@@ -18,7 +18,7 @@ const PokeSpecies = ({ species }) => {
     }
   }, [species]);
 
-  return <p>{description}</p>;
+  return <pre>{description}</pre>;
 };
 
 PokeSpecies.propTypes = {
