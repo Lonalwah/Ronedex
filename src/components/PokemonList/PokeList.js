@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 
-import PokeContext from "../context/poke/pokeContext";
+import PokeContext from "../../context/poke/pokeContext";
 import PokeItem from "./PokeItem";
 
 const PokeList = () => {

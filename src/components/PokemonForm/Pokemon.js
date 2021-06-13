@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import PokeContext from "../context/poke/pokeContext";
+import PokeContext from "../../context/poke/pokeContext";
 import PokeSpecies from "./PokeSpecies";
 import PokeAbility from "./PokeAbility";
 

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import PokeContext from "../context/poke/pokeContext";
+import PokeContext from "../../context/poke/pokeContext";
 import PropTypes from "prop-types";
 
 const PokeItem = ({ pokeItem }) => {

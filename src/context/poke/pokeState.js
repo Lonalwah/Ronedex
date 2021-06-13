@@ -42,7 +42,7 @@ const PokeState = (props) => {
         payload: res.data,
       });
     } catch (error) {
-      dispatch({ type: POKEMON_ERROR, payload: error.msg });
+      dispatch({ type: POKEMON_ERROR, payload: error.message });
     }
   };
 
@@ -52,7 +52,7 @@ const PokeState = (props) => {
       const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
       dispatch({ type: GET_POKEMON, payload: res.data });
     } catch (error) {
-      dispatch({ type: POKEMON_ERROR, payload: error.msg });
+      dispatch({ type: POKEMON_ERROR, payload: error.message });
     }
   };
 
@@ -61,7 +61,7 @@ const PokeState = (props) => {
       const res = await axios.get(species.url);
       dispatch({ type: GET_SPECIES, payload: res.data });
     } catch (error) {
-      dispatch({ type: POKEMON_ERROR, payload: error.msg });
+      dispatch({ type: POKEMON_ERROR, payload: error.message });
     }
   };
 

@@ -6,8 +6,8 @@ import M from "materialize-css/dist/js/materialize.min.js";
 import "./App.css";
 
 import PokeState from "./context/poke/pokeState";
-import PokeList from "./components/PokeList";
-import Pokemon from "./components/Pokemon";
+import PokeList from "./components/PokemonList/PokeList";
+import Pokemon from "./components/PokemonForm/Pokemon";
 
 const App = () => {
   useEffect(() => {
