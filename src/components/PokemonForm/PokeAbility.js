@@ -5,12 +5,15 @@ import PropTypes from "prop-types";
 const PokeAbility = ({ pokeAbility }) => {
   const [ability, setAbility] = useState(null);
 
-  useEffect(async () => {
-    const res = await axios.get(pokeAbility.ability.url);
-    setAbility(res.data);
+  useEffect(() => {
+    async function fetchData() {
+      const res = await axios.get(pokeAbility.ability.url);
+      setAbility(res.data);
+    }
+    fetchData();
   }, [pokeAbility]);
 
-  if (ability === null) {
+  if (!ability) {
     return (
       <div className='progress'>
         <div className='indeterminate'></div>
