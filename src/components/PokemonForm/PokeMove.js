@@ -18,12 +18,21 @@ function PokeMove({pokeMove}) {
   if(!move) 
     return <p>Loading {pokeMove.name}</p>
 
-  const {id, name, effect_entries} = move;
+  const {id, name, effect_entries, flavor_text_entries} = move;
+
+  let en_texts = flavor_text_entries.filter((e) => e.language.name === "en");
+
+  // Set random flavour text
+  let rand_text =
+    en_texts[Math.floor(Math.random() * en_texts.length)].flavor_text;
 
   return (
     <li key={id}>
       <div className="collapsible-header">{name.toUpperCase()}</div>
-      <div className="collapsible-body"><span>{effect_entries[0].effect}</span></div>
+      <div className="collapsible-body">
+        <blockquote>{rand_text}</blockquote>
+        <span>{effect_entries[0].effect}</span>
+      </div>
     </li>
   )
 }
