@@ -1,83 +1,31 @@
-import React, { Fragment, useContext, useEffect, useRef } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import PokeContext from "../../context/poke/pokeContext";
-import PokeSpecies from "./PokeSpecies";
+import PokeDetail from "./PokeDetail";
 import PokeAbility from "./PokeAbility";
-
 import M from "materialize-css";
 
 const Pokemon = () => {
   const pokeContext = useContext(PokeContext);
-  const { loading, pokemon, species, getSpecies } = pokeContext;
+  const { loading, pokemon } = pokeContext;
 
   useEffect(() => {
     let tabs = document.querySelectorAll(".tabs");
     M.Tabs.init(tabs);
   });
 
-  useEffect(() => {
-    if (pokemon !== null) getSpecies(pokemon.species);
-  }, [pokemon]);
-
-  if (loading || !pokemon || !species)
+  if (loading || !pokemon)
     return (
       <div className='progress'>
         <div className='indeterminate'></div>
       </div>
     );
 
-  const { name, sprites, types, stats, abilities, moves, height, weight } =
-    pokemon;
+  const { stats, abilities, moves } = pokemon;
 
   return (
     <Fragment>
-      <div className='card'>
-        <div className='row'>
-          <div className='col s3'>
-            <div className='card-image'>
-              <img
-                alt={`official artwork ${name}`}
-                src={sprites.other["official-artwork"].front_default}
-              />
-              <p className='center-align'>
-                No.{" "}
-                {String(
-                  species.pokedex_numbers.find(
-                    (e) => e.pokedex.name === "national"
-                  ).entry_number
-                ).padStart(3, "0")}
-              </p>
-            </div>
-          </div>
-          <div className='col s9'>
-            <div className='card-content'>
-              <span className='card-title'>
-                {species.names.find((e) => e.language.name === "en").name}
-              </span>
-              <PokeSpecies species={species} />
-              <div className='collection'>
-                <li className='collection-item'>
-                  <span className='title'>Type</span>
-                  <span className='secondary-content'>
-                    {types.map((t) => (
-                      <span key={t.type.name} className='badge blue white-text'>
-                        {t.type.name}
-                      </span>
-                    ))}
-                  </span>
-                </li>
-                <li className='collection-item'>
-                  <span className='title'>Height</span>
-                  <span className='secondary-content'>{height}</span>
-                </li>
-                <li className='collection-item'>
-                  <span className='title'>Weight</span>
-                  <span className='secondary-content'>{weight}</span>
-                </li>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <PokeDetail pokemon={pokemon} />
+      <div className="card">
         <div className='card-stacked'>
           <div className='card-tabs'>
             <ul className='tabs'>
@@ -126,7 +74,7 @@ const Pokemon = () => {
             </div>
           </div>
         </div>
-      </div>
+        </div>
     </Fragment>
   );
 };

@@ -5,7 +5,7 @@ const PokeSpecies = ({ species }) => {
   const [description, setDescription] = useState("");
 
   useEffect(() => {
-    if (species !== null) {
+    if (species) {
       let texts = species.flavor_text_entries.filter(
         (e) => e.language.name === "en"
       );
@@ -17,7 +17,7 @@ const PokeSpecies = ({ species }) => {
     }
   }, [species]);
 
-  return <pre>{description}</pre>;
+  return <p>{description}</p>;
 };
 
 PokeSpecies.propTypes = {
