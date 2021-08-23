@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <PokeState>
-      <div className='App'>
+      <div className='ronedex App'>
         <header>
           <nav>
             <div className='nav-wrapper'>
