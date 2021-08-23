@@ -9,12 +9,15 @@ const PokeItem = ({ pokeItem }) => {
 
   const [pokeForm, setPokeForm] = useState(null);
 
-  useEffect(async () => {
-    const res = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon-form/${pokeItem.name}`
-    );
+  useEffect(() => {
+    async function fetchData() {
+      const res = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon-form/${pokeItem.name}`
+      );
+      setPokeForm(res.data);
+    }
 
-    setPokeForm(res.data);
+    fetchData();
   }, [pokeItem]);
 
   const onClick = (e) => {
@@ -22,7 +25,7 @@ const PokeItem = ({ pokeItem }) => {
     getPokemon(pokeItem.name);
   };
 
-  if (pokeForm === null)
+  if (!pokeForm)
     return (
       <li>
         <a href='#!' onClick={onClick}>

@@ -3,16 +3,16 @@ import PokeContext from "../../context/poke/pokeContext";
 import PokeSpecies from "./PokeSpecies";
 import PokeAbility from "./PokeAbility";
 
-import M from "materialize-css/dist/js/materialize.min.js";
+import M from "materialize-css";
 
 const Pokemon = () => {
   const pokeContext = useContext(PokeContext);
   const { loading, pokemon, species, getSpecies } = pokeContext;
-  const tabRef = useRef();
+
   useEffect(() => {
-    // Refactor to useRef
-    M.Tabs.init(document.querySelector(".tabs"));
-  }, []);
+    let tabs = document.querySelectorAll(".tabs");
+    M.Tabs.init(tabs);
+  });
 
   useEffect(() => {
     if (pokemon !== null) getSpecies(pokemon.species);
@@ -25,7 +25,7 @@ const Pokemon = () => {
       </div>
     );
 
-  const { id, name, sprites, types, stats, abilities, moves, height, weight } =
+  const { name, sprites, types, stats, abilities, moves, height, weight } =
     pokemon;
 
   return (
@@ -79,17 +79,17 @@ const Pokemon = () => {
         </div>
 
         <div className='card-stacked'>
-          <div class='card-tabs'>
-            <ul class='tabs'>
-              <li class='tab'>
+          <div className='card-tabs'>
+            <ul className='tabs'>
+              <li className='tab'>
                 <a href='#stats'>Stats</a>
               </li>
-              <li class='tab'>
-                <a class='active' href='#abilities'>
+              <li className='tab'>
+                <a className='active' href='#abilities'>
                   Abilities
                 </a>
               </li>
-              <li class='tab'>
+              <li className='tab'>
                 <a href='#moves'>Moves</a>
               </li>
             </ul>
