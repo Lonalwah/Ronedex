@@ -22,7 +22,7 @@ const PokeDetail = ({pokemon}) => {
 
   return (
     <Fragment>
-      <div className='card'>
+      <div className='poke-detail card'>
         <div className='row'>
           <div className='col s3'>
             <div className='card-image'>
@@ -40,32 +40,30 @@ const PokeDetail = ({pokemon}) => {
                 </div>
             </div>
             <div className='col s9'>
-                <div className='card-content'>
-                <span className='card-title'>
+              
+              <div className='card-content'>
+                <div className='card-title'>
+                  <span>
                     {species.names.find((e) => e.language.name === "en").name}
-                </span>
+                  </span>
+                </div>
+                
                 <PokeSpecies species={species} />
-                <div className='collection'>
-                    <li className='collection-item'>
-                    <span className='title'>Type</span>
-                    <span className='secondary-content'>
-                        {types.map((t) => (
-                        <span key={t.type.name} className='badge blue white-text'>
-                            {t.type.name}
-                        </span>
+                <dl>
+                  <dt>Type</dt>
+                  <dd>
+                    {types.map((t) => (
+                      <span key={t.type.name} className='badge blue white-text'>
+                        {t.type.name}
+                      </span>
                         ))}
-                    </span>
-                    </li>
-                    <li className='collection-item'>
-                    <span className='title'>Height</span>
-                    <span className='secondary-content'>{height}</span>
-                    </li>
-                    <li className='collection-item'>
-                    <span className='title'>Weight</span>
-                    <span className='secondary-content'>{weight}</span>
-                    </li>
-                </div>
-                </div>
+                  </dd>
+                  <dt>Height</dt>
+                  <dd>{height}</dd>
+                  <dt>Weight</dt>
+                  <dd>{weight}</dd>
+                </dl>
+              </div>
             </div>
             </div>
       </div>

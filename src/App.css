@@ -1,3 +1,25 @@
 .ronedex .collection li.collection-item {
   list-style: none;
 }
+
+.ronedex .poke-detail .card-image {
+  padding: 24px;
+}
+
+.ronedex .poke-detail dl span.badge {
+  float: none;
+  margin: 0 7px;
+}
+
+.ronedex dt::after {
+  content: ": ";
+}
+
+.ronedex .poke-detail dt:before {
+  content: "";
+  display: block;
+}
+.ronedex .poke-detail dt,
+dd {
+  display: inline;
+}
