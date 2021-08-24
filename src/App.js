@@ -37,9 +37,6 @@ const App = () => {
               </div>
             </li>
             <li>
-              <a href='#!'>About</a>
-            </li>
-            <li>
               <div className='divider'></div>
             </li>
             <li className='no-padding'>

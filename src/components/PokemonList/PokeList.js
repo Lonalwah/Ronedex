@@ -13,7 +13,7 @@ const PokeList = () => {
   }, []);
 
   useEffect(() => {
-    if (pokemonCount !== 0) {
+    if (pokemonCount) {
       // Get initial Random Pokemon
       getPokemon(Math.floor(Math.random() * pokemonCount + 1));
     }
@@ -29,9 +29,7 @@ const PokeList = () => {
           <a
             href='#!'
             className='waves-effect waves-teal btn-flat btn-large'
-            onClick={() => {
-              getPokemonList(listNextUrl);
-            }}
+            onClick={() => getPokemonList(listNextUrl)}
           >
             More Pokemon...
           </a>

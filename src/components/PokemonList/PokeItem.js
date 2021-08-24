@@ -16,7 +16,6 @@ const PokeItem = ({ pokeItem }) => {
       );
       setPokeForm(res.data);
     }
-
     fetchData();
   }, [pokeItem]);
 
