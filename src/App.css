@@ -23,3 +23,17 @@
 dd {
   display: inline;
 }
+
+.ronedex .poke-item {
+  margin: 15px 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.ronedex .poke-item .sprite {
+  min-width: 48px;
+}
+
+.ronedex .poke-item .sprite img {
+  margin: auto;
+}

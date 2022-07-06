@@ -18,44 +18,23 @@ const App = () => {
   return (
     <PokeState>
       <div className='ronedex App'>
-        <header>
+        <header className="navbar-fixed">
           <nav>
             <div className='nav-wrapper'>
               <a
                 href='#!'
-                data-target='slide-out'
-                className='brand-logo left sidenav-trigger show-on-large'
+                className='brand-logo'
               >
-                <i className='material-icons'>menu</i>Ronedex
+                Ronedex
               </a>
             </div>
           </nav>
-          <ul id='slide-out' className='sidenav' style={{ height: "100%" }}>
-            <li>
-              <div className='user-view'>
-                <span className='header'>Ronedex</span>
-              </div>
-            </li>
-            <li>
-              <div className='divider'></div>
-            </li>
-            <li className='no-padding'>
-              <ul className='collapsible collapsible-accordion'>
-                <li>
-                  <a href='#!' className='collapsible-header'>
-                    Pokemon<i className='material-icons'>arrow_drop_down</i>
-                  </a>
-                  <div className='collapsible-body'>
-                    <PokeList />
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
         </header>
         <section>
           <div className='container'>
-            <Pokemon />
+            <div className="row">
+              <PokeList />
+            </div>
           </div>
         </section>
         <footer></footer>

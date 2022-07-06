@@ -5,39 +5,40 @@ import PokeItem from "./PokeItem";
 
 const PokeList = () => {
   const pokeContext = useContext(PokeContext);
-  const { pokemonList, getPokemonList, getPokemon, listNextUrl, pokemonCount } =
+  const { pokemonList, getPokemonList, listNextUrl } =
     pokeContext;
 
   useEffect(() => {
     getPokemonList(null, 0, 30);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (pokemonCount) {
-      // Get initial Random Pokemon
-      getPokemon(Math.floor(Math.random() * pokemonCount + 1));
-    }
-  }, [pokemonCount]);
-
   return (
-    <ul>
-      {pokemonList.map((p) => (
-        <PokeItem pokeItem={p} key={p.name} />
-      ))}
+    <div>
+      <div className="section">
+        <div className="row">
+          {pokemonList.map((p) => (
+            <PokeItem pokeItem={p} key={p.name} />
+            ))}
+        </div>
+      </div>
       {listNextUrl !== null ? (
-        <li>
+      <div className="section">
+        <div className="center-align">
           <a
             href='#!'
-            className='waves-effect waves-teal btn-flat btn-large'
+            className='waves-effect waves-teal btn-flat btn-large center-align'
             onClick={() => getPokemonList(listNextUrl)}
           >
             More Pokemon...
           </a>
-        </li>
+        </div>
+      </div>
       ) : (
         ""
       )}
-    </ul>
+    </div>
   );
 };
 

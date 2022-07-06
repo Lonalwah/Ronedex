@@ -26,33 +26,33 @@ const PokeItem = ({ pokeItem }) => {
 
   if (!pokeForm)
     return (
-      <li>
-        <a href='#!' onClick={onClick}>
+      <div className="poke-item col s3 l2">
+        <a href='#poke-modal' className="modal-trigger" onClick={onClick}>
           <i style={{ width: "48px" }}></i>
           <span className='title'>
             {pokeItem.name.slice(0, 1).toUpperCase() + pokeItem.name.slice(1)}
           </span>
         </a>
-      </li>
+      </div>
     );
 
-  const { id, name, sprites } = pokeForm;
+  const { name, sprites } = pokeForm;
 
   return (
-    <li>
-      <a href='#!' onClick={onClick}>
-        <i style={{ width: "48px" }}>
+    <div className="poke-item hoverable col s3 m2">
+      <a href='#poke-modal' className="modal-trigger" onClick={onClick}>
+        <div className="sprite valign-wrapper center-align">
           <img
-            className='circle responsive-img'
+            className='responsive-img'
             alt={name}
             src={sprites.front_default}
           />
-        </i>
-        <span className='title'>
-          {id}. {name.slice(0, 1).toUpperCase() + name.slice(1)}
-        </span>
+        </div>
+        <div className='center-align'>
+          {name.slice(0, 1).toUpperCase() + name.slice(1)}
+        </div>
       </a>
-    </li>
+    </div>
   );
 };
 
