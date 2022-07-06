@@ -7,7 +7,7 @@ import "./App.css";
 
 import PokeState from "./context/poke/pokeState";
 import PokeList from "./components/PokemonList/PokeList";
-import Pokemon from "./components/PokemonForm/Pokemon";
+import PokeModal from "./components/PokeModal";
 
 const App = () => {
   useEffect(() => {
@@ -23,7 +23,7 @@ const App = () => {
             <div className='nav-wrapper'>
               <a
                 href='#!'
-                className='brand-logo'
+                className='brand-logo center'
               >
                 Ronedex
               </a>
@@ -33,6 +33,7 @@ const App = () => {
         <section>
           <div className='container'>
             <div className="row">
+              <PokeModal />
               <PokeList />
             </div>
           </div>

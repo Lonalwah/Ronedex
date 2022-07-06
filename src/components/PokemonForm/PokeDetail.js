@@ -18,56 +18,41 @@ const PokeDetail = ({ pokemon }) => {
       </div>
     );
 
-  const { name, sprites, types, height, weight } = pokemon;
+  const { name, sprites, types } = pokemon;
 
   return (
-    <Fragment>
-      <div className='poke-detail card'>
-        <div className='row'>
-          <div className='col s3'>
-            <div className='card-image'>
-              <img
-                alt={`official artwork ${name}`}
-                src={sprites.other["official-artwork"].front_default}
-              />
-              <p className='center-align'>
-                No.{" "}
-                {String(
-                  species.pokedex_numbers.find(
-                    (e) => e.pokedex.name === "national"
-                  ).entry_number
-                ).padStart(3, "0")}
-              </p>
-            </div>
-          </div>
-          <div className='col s9'>
-            <div className='card-content'>
-              <div className='card-title'>
-                <span>
-                  {species.names.find((e) => e.language.name === "en").name}
-                </span>
-              </div>
-
-              <PokeSpecies species={species} />
-              <dl>
-                <dt>Type</dt>
-                <dd>
-                  {types.map((t) => (
-                    <span key={t.type.name} className='badge blue white-text'>
-                      {t.type.name}
-                    </span>
-                  ))}
-                </dd>
-                <dt>Height</dt>
-                <dd>{height}</dd>
-                <dt>Weight</dt>
-                <dd>{weight}</dd>
-              </dl>
-            </div>
-          </div>
-        </div>
+    <div className='poke-detail'>
+      <div className='center-align'>
+        <img
+          alt={`official artwork ${name}`}
+          src={sprites.other["official-artwork"].front_default}
+        />
+        <p className='center-align'>
+          No.{" "}
+          {String(
+            species.pokedex_numbers.find(
+              (e) => e.pokedex.name === "national"
+            ).entry_number
+          ).padStart(3, "0")}
+        </p>
       </div>
-    </Fragment>
+      <div className='card-title'>
+        <h4>
+          {species.names.find((e) => e.language.name === "en").name}
+        </h4>
+      </div>
+      <PokeSpecies species={species} />
+      <dl>
+        <dt>Type</dt>
+        <dd>
+          {types.map((t) => (
+            <span key={t.type.name} className='badge blue white-text'>
+              {t.type.name}
+            </span>
+          ))}
+        </dd>
+      </dl>
+    </div>
   );
 };
 

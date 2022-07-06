@@ -24,6 +24,10 @@ dd {
   display: inline;
 }
 
+.ronedex .poke-detail img {
+  width: 150px;
+}
+
 .ronedex .poke-item {
   margin: 15px 0;
   padding-top: 10px;
